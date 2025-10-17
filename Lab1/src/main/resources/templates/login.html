@@ -1,0 +1,51 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.4; margin: 24px; }
+        .field { margin: 8px 0; }
+        .error { color: #c0392b; margin: 6px 0; }
+        .success { color: #27ae60; margin: 6px 0; }
+        ul.errors { padding-left: 20px; margin: 8px 0; }
+        label { display: inline-block; width: 100px; }
+        input[type="text"], input[type="password"] { padding: 6px; width: 220px; }
+        button { padding: 8px 14px; cursor: pointer; }
+    </style>
+</head>
+<body>
+<h2>Đăng nhập</h2>
+
+<form th:action="@{/login/check}" method="post">
+    <div class="field">
+        <label>Username:</label>
+        <input type="text" name="username"
+               th:value="${username}"
+               required>
+    </div>
+
+    <div class="field">
+        <label>Password:</label>
+        <input type="password" name="password" required>
+    </div>
+
+    <button type="submit">Đăng nhập</button>
+</form>
+
+<!-- Thông báo thành công -->
+<p class="success" th:if="${message != null}">
+    Kết quả cho <b th:text="${username}">user</b>: <span th:text="${message}">...</span>
+</p>
+
+<!-- Danh sách lỗi (nếu có) -->
+<div th:if="${errors != null}">
+    <p class="error"><strong>Đăng nhập thất bại:</strong></p>
+    <ul class="errors">
+        <li th:each="e : ${errors}" th:text="${e}"></li>
+    </ul>
+</div>
+
+<p><a href="/poly/hello">Về Hello</a></p>
+</body>
+</html>

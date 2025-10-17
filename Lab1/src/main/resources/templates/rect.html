@@ -1,0 +1,29 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính diện tích & chu vi hình chữ nhật</title>
+</head>
+<body>
+<h2>Tính diện tích & chu vi hình chữ nhật</h2>
+
+<form th:action="@{/rect/calc}" method="post">
+    <label>Chiều rộng:
+        <input type="number" name="width" step="any" required>
+    </label>
+    <br>
+    <label>Chiều cao:
+        <input type="number" name="height" step="any" required>
+    </label>
+    <br>
+    <button type="submit">Tính</button>
+</form>
+
+<div th:if="${areaFormula != null}">
+    <p><strong>Diện tích:</strong> <span th:text="${areaFormula}">w x h = ...</span></p>
+    <p><strong>Chu vi:</strong> <span th:text="${perimeterFormula}">2 x (w + h) = ...</span></p>
+</div>
+<p><a href="/poly/hello">Về Hello</a></p>
+
+</body>
+</html>
