@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập</title>
+</head>
+<body>
+<h3 style="color:red" th:text="${message}"></h3>
+<form th:action="@{/account/login}" method="post">
+    <div>
+        <label for="username">Username:</label>
+        <input id="username" name="username" th:value="${username}">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password">
+    </div>
+    <div>
+        <input id="remember" type="checkbox" name="remember" value="true">
+        <label for="remember">Remember me?</label>
+    </div>
+    <button type="submit">Login</button>
+</form>
+<br>
+<a th:href="@{/account/register}">Chưa có tài khoản? Đăng ký</a>
+</body>
+</html>

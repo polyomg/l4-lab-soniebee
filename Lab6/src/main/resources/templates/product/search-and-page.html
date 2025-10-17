@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Pagination and Sorting</title>
+</head>
+<body>
+    <h3>PAGINATION & SORTING</h3>
+    <h4 th:text="|Sorting by ${field.toUpperCase()}|"></h4>
+
+    <table border="1" style="width:100%">
+        <thead>
+            <tr>
+                <th><a th:href="@{/product/search-and-page(p=0, field='id')}">Id</a></th>
+                <th><a th:href="@{/product/search-and-page(p=0, field='name')}">Name</a></th>
+                <th><a th:href="@{/product/search-and-page(p=0, field='price')}">Price</a></th>
+                <th><a th:href="@{/product/search-and-page(p=0, field='createDate')}">Date</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item: ${page.content}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}"></td>
+                <td th:text="${#dates.format(item.createDate, 'dd-MM-yyyy')}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+    
+    <div style="text-align: center;">
+        <a th:href="@{|/product/search-and-page?p=0&field=${field}|}">First</a>
+        <a th:href="@{|/product/search-and-page?p=${page.number - 1}&field=${field}|}" th:if="${page.number > 0}">Previous</a>
+        
+        <span> Trang [[${page.number + 1}]] / [[${page.totalPages}]] </span>
+
+        <a th:href="@{|/product/search-and-page?p=${page.number + 1}&field=${field}|}" th:if="${page.number < page.totalPages - 1}">Next</a>
+        <a th:href="@{|/product/search-and-page?p=${page.totalPages - 1}&field=${field}|}">Last</a>
+    </div>
+</body>
+</html>

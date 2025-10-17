@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Product Management</title>
+</head>
+<body>
+    <h3>PRODUCT MANAGEMENT</h3>
+    <th:block th:replace="@{/product/crud/_form}"></th:block>
+    <hr>
+    <th:block th:replace="@{/product/crud/_table}"></th:block>
+</body>
+</html>

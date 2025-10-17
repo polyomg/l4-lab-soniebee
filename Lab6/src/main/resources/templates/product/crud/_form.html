@@ -1,0 +1,33 @@
+<form th:action="@{/product/crud/index}" th:object="${item}" method="post">
+    <div>
+        <label>Name:</label>
+        <input th:field="*{name}" />
+    </div>
+    <div style="margin-top: 5px;">
+        <label>Price:</label>
+        <input th:field="*{price}" />
+    </div>
+    <div style="margin-top: 5px;">
+        <label>Image:</label>
+        <input th:field="*{image}" placeholder="image.jpg" />
+    </div>
+    <div style="margin-top: 5px;">
+        <label>Category:</label>
+        <select th:field="*{category.id}">
+            <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+        </select>
+    </div>
+    <div style="margin-top: 5px;">
+        <label>Available?</label>
+        <input type="radio" th:field="*{available}" th:value="true" /> Yes
+        <input type="radio" th:field="*{available}" th:value="false" /> No
+    </div>
+    <hr>
+    <input th:field="*{id}" type="hidden" />
+    <input th:field="*{createDate}" type="hidden" />
+
+    <button formaction="/product/crud/create">Create</button>
+    <button formaction="/product/crud/update">Update</button>
+    <a th:href="@{|/product/crud/delete/${item.id}|}">Delete</a>
+    <a th:href="@{/product/crud/index}">Reset</a>
+</form>
