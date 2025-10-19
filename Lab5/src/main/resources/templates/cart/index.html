@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+</head>
+<body>
+<h1>Giỏ hàng của bạn</h1>
+<table border="1" style="width:100%">
+    <thead>
+    <tr>
+        <th>Mã SP</th>
+        <th>Tên SP</th>
+        <th>Đơn giá</th>
+        <th>Số lượng</th>
+        <th>Thành tiền</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item: ${cart.items}">
+        <form th:action="@{/cart/update}" method="post">
+            <input type="hidden" name="id" th:value="${item.id}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}"></td>
+            <td><input type="number" name="qty" th:value="${item.qty}" onchange="this.form.submit()" style="width: 60px;">
+            </td>
+            <td th:text="${#numbers.formatDecimal(item.price * item.qty, 0, 'COMMA', 2, 'POINT')}"></td>
+            <td>
+                <a th:href="@{'/cart/remove/' + ${item.id}}">Xóa</a>
+            </td>
+        </form>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="3" style="text-align: right">Tổng:</td>
+        <td th:text="${cart.count}"></td>
+        <td colspan="2" th:text="${#numbers.formatDecimal(cart.amount, 0, 'COMMA', 2, 'POINT')}"></td>
+    </tr>
+    </tfoot>
+</table>
+<hr>
+<a th:href="@{/cart/clear}">Xóa giỏ hàng</a> |
+<a th:href="@{/item/index}">Thêm mặt hàng khác</a>
+</body>
+</html>
